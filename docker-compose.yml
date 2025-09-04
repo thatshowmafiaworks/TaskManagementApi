@@ -1,0 +1,40 @@
+services:
+  api:
+    container_name: taskmanagementapi
+    image: ${DOCKER_REGISTRY-}taskmanagementapi
+    build:
+      context: .
+      dockerfile: TaskManagementApi/Dockerfile
+    depends_on: 
+      - db 
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - ASPNETCORE_HTTPS_PORTS=8081
+      - ConnectionStrings__Database=Server=localhost;Port=5432;Database=TaskManagementDB;User Id=postgres;Password=postgres;Include Error Detail=true
+      - JWT__Audience=TaskManagementApi
+      - JWT__Issuer=TaskManagementApi
+      - JWT__SigninKey=SuperSecretSuperLongSignInKeyForGeneratingJWTToken123456789
+    ports:
+    - "8080"
+    - "8081"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+  db:
+    container_name: taskmanagementdb
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=TaskManagementDB
+    restart: always
+    volumes:
+      - postgres_db:/var/lib/postgresql/data/
+
+volumes:
+  postgres_db:
