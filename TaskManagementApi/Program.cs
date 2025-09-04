@@ -16,7 +16,17 @@ builder.Services.AddDbContext<AppDbContext>(opts =>
 });
 
 // Add Identity that uses AppDbContext as store
-builder.Services.AddIdentity<AppUser, AppRole>()
+builder.Services.AddIdentity<AppUser, AppRole>(opts =>
+{
+    opts.Password = new()
+    {
+        RequireDigit = true,
+        RequiredLength = 6,
+        RequireNonAlphanumeric = false,
+        RequireLowercase = true,
+        RequireUppercase = true
+    };
+})
     .AddEntityFrameworkStores<AppDbContext>()
     .AddDefaultTokenProviders();
 

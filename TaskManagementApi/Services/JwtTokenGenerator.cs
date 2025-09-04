@@ -15,7 +15,7 @@ public class JwtTokenGenerator
         _logger = logger;
         _userManager = userManager;
     }
-    public string GenerateToken(IdentityUser user, IList<string> roles)
+    public string GenerateToken(AppUser user)
     {
         var tokenHandler = new JwtSecurityTokenHandler();
 
@@ -29,11 +29,6 @@ public class JwtTokenGenerator
                 new Claim(JwtRegisteredClaimNames.Jti,Guid.NewGuid().ToString()),
                 new Claim(JwtRegisteredClaimNames.Name,user.UserName ?? throw new ArgumentException("User Name is empty"))
             };
-        foreach (var role in roles)
-        {
-            claims.Add(new Claim(ClaimTypes.Role.ToString(), role));
-        }
-
         var tokenDescriptor = new SecurityTokenDescriptor
         {
             Subject = new ClaimsIdentity(claims),

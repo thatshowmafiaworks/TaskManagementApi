@@ -11,13 +11,13 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8080
       - ASPNETCORE_HTTPS_PORTS=8081
-      - ConnectionStrings__Database=Server=localhost;Port=5432;Database=TaskManagementDB;User Id=postgres;Password=postgres;Include Error Detail=true
+      - ConnectionStrings__Database=Server=db;Port=5432;Database=TaskManagementDB;User Id=postgres;Password=postgres;Include Error Detail=true
       - JWT__Audience=TaskManagementApi
       - JWT__Issuer=TaskManagementApi
       - JWT__SigninKey=SuperSecretSuperLongSignInKeyForGeneratingJWTToken123456789
     ports:
-    - "8080"
-    - "8081"
+    - "8080:8080"
+    - "8081:8081"
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
