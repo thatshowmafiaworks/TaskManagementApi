@@ -15,7 +15,7 @@ builder.Services.AddDbContext<AppDbContext>(opts =>
     opts.UseNpgsql(builder.Configuration.GetConnectionString("Database")!);
 });
 
-// Add Identity that uses AppDbContext as store
+// Add Identity that uses AppDbContext as store, with password requirements
 builder.Services.AddIdentity<AppUser, AppRole>(opts =>
 {
     opts.Password = new()
@@ -55,6 +55,9 @@ builder.Services.AddAuthorization();
 // Add service to generate jwt tokens for authorizations/authentications
 builder.Services.AddScoped<JwtTokenGenerator>();
 
+// Add repository for Tasks
+builder.Services.AddScoped<TasksRepository>();
+
 // Add custom exception handling
 //builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 
@@ -64,8 +67,10 @@ var app = builder.Build();
 
 app.UseHttpsRedirection();
 
+// map all endpoints across assembly
 app.MapCarter();
 
+// use global exception handling
 //app.UseExceptionHandler(opts => { });
 
 app.Run();
