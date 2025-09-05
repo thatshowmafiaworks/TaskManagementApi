@@ -10,6 +10,7 @@ public class Task
     public Priority Priority { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime UpdatedAt { get; set; }
+    public Guid UserId { get; set; }
     public AppUser User { get; set; } = default!;
 }
 
