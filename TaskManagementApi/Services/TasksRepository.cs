@@ -4,34 +4,58 @@ public class TasksRepository(
     AppDbContext context
     )
 {
+    public async Task<Models.Task> Get(Guid id)
+    {
+        var task = await context.Tasks.FindAsync();
+        return task;
+    }
+
+    public async Task<IEnumerable<Models.Task>> GetAll(
+        int pageNumber = 1,
+        int pageSize = 10,
+        Status? status = null,
+        Priority? priority = null)
+    {
+        IQueryable<Models.Task> tasks = context.Tasks;
+        if (status != null)
+            tasks = tasks.Where(x => x.Status == status);
+        if (priority != null)
+            tasks = tasks.Where(x => x.Priority == priority);
+        var result = await (tasks.Skip((pageNumber - 1) * pageSize).Take(pageSize)).ToListAsync();
+        return result;
+    }
+
+    public async Task<IEnumerable<Models.Task>> GetAllByUser(
+        AppUser user,
+        int pageNumber = 1,
+        int pageSize = 10,
+        Status? status = null,
+        Priority? priority = null)
+    {
+        IQueryable<Models.Task> tasks = context.Tasks.Where(x => x.UserId == user.Id);
+        if (status != null)
+            tasks = tasks.Where(x => x.Status == status);
+        if (priority != null)
+            tasks = tasks.Where(x => x.Priority == priority);
+        var result = await (tasks.Skip((pageNumber - 1) * pageSize).Take(pageSize)).ToListAsync();
+        return result;
+    }
+
     public async System.Threading.Tasks.Task Create(Models.Task task)
     {
         context.Tasks.Add(task);
         await context.SaveChangesAsync();
     }
 
-    public System.Threading.Tasks.Task Delete(Models.Task task)
+    public async System.Threading.Tasks.Task Update(Models.Task task)
     {
-        throw new NotImplementedException();
+        context.Tasks.Update(task);
+        await context.SaveChangesAsync();
     }
 
-    public Task<Models.Task> Get(Guid Id, int pageNumber = 1, int pageSize = 10, int status = 0, int priority = 0)
+    public async System.Threading.Tasks.Task Delete(Models.Task task)
     {
-        throw new NotImplementedException();
-    }
-
-    public Task<IEnumerable<Models.Task>> GetAll(CancellationToken ct = default)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<IEnumerable<Models.Task>> GetAllByUser(AppUser user, int pageNumber = 1, int pageSize = 10, int status = 0, int priority = 0)
-    {
-        throw new NotImplementedException();
-    }
-
-    public System.Threading.Tasks.Task Update(Models.Task task)
-    {
-        throw new NotImplementedException();
+        context.Tasks.Remove(task);
+        await context.SaveChangesAsync();
     }
 }
