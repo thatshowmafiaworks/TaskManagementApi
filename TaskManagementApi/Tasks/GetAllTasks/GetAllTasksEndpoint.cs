@@ -12,7 +12,7 @@ public class GetAllTasksEndpoint
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapGet("/tasks",
+        app.MapGet("/tasks/all",
             async ([AsParameters] GetAllTasksRequest request, ISender sender) =>
         {
             var query = request.Adapt<GetAllTasksQuery>();

@@ -10,11 +10,10 @@ public class GetAllTasksByUserEndpoint
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapGet("/tasks/my",
+        app.MapGet("/tasks",
             async ([AsParameters] GetAllTasksByUserRequest request,
             ISender sender,
-            HttpContext context,
-            UserManager<AppUser> userManager) =>
+            HttpContext context) =>
             {
                 var userId = context.User.FindFirstValue(ClaimTypes.NameIdentifier);
 

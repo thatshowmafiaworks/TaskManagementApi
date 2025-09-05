@@ -6,7 +6,7 @@ public class TasksRepository(
 {
     public async Task<Models.Task> Get(Guid id)
     {
-        var task = await context.Tasks.FindAsync();
+        var task = await context.Tasks.FindAsync(id);
         return task;
     }
 
