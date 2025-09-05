@@ -13,3 +13,4 @@ global using TaskManagementApi.CQRS;
 global using TaskManagementApi.Data;
 global using TaskManagementApi.Models;
 global using TaskManagementApi.Services;
+global using TaskManagementApi.Tasks.GetAllTasks;

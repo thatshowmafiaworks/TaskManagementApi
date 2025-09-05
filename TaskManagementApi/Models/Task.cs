@@ -1,4 +1,6 @@
-﻿namespace TaskManagementApi.Models;
+﻿using System.Text.Json.Serialization;
+
+namespace TaskManagementApi.Models;
 
 public class Task
 {
@@ -11,7 +13,8 @@ public class Task
     public DateTime CreatedAt { get; set; }
     public DateTime UpdatedAt { get; set; }
     public Guid UserId { get; set; }
-    public AppUser User { get; set; } = default!;
+    [JsonIgnore]
+    public AppUser User { get; set; }
 }
 
 public enum Status

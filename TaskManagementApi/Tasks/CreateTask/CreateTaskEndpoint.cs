@@ -37,7 +37,7 @@ public class CreateTaskEndpoint
 
                 var result = await sender.Send(command);
                 var response = result.Adapt<CreateTaskResponse>();
-                return response;
+                return Results.Ok(response);
             })
             .RequireAuthorization();
     }

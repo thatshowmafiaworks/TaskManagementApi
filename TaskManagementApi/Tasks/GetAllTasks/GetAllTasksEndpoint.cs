@@ -1,5 +1,4 @@
-﻿
-namespace TaskManagementApi.Tasks.GetAllTasks;
+﻿namespace TaskManagementApi.Tasks.GetAllTasks;
 
 public record GetAllTasksRequest(
     int? PageNumber = 1,

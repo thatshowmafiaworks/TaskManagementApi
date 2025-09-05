@@ -26,13 +26,13 @@ public class TasksRepository(
     }
 
     public async Task<IEnumerable<Models.Task>> GetAllByUser(
-        AppUser user,
+        Guid userId,
         int pageNumber = 1,
         int pageSize = 10,
         Status? status = null,
         Priority? priority = null)
     {
-        IQueryable<Models.Task> tasks = context.Tasks.Where(x => x.UserId == user.Id);
+        IQueryable<Models.Task> tasks = context.Tasks.Where(x => x.UserId == userId);
         if (status != null)
             tasks = tasks.Where(x => x.Status == status);
         if (priority != null)
