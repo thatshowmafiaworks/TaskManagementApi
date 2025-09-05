@@ -8,7 +8,7 @@ public class LoginEndpoint
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapPost("/auth/login", async (LoginRequest request, ISender sender) =>
+        app.MapPost("/users/login", async (LoginRequest request, ISender sender) =>
         {
             var query = request.Adapt<LoginQuery>();
             var result = await sender.Send(query);
