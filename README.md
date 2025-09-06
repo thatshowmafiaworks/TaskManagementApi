@@ -1,4 +1,4 @@
-TaskManagementApi — README (English)
+TaskManagementApi
 ====================================
 
 Overview
