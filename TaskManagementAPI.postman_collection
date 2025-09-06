@@ -1,0 +1,311 @@
+{
+	"info": {
+		"_postman_id": "a9c4b3d3-c72d-4493-93a2-7884e9b27de2",
+		"name": "TaskManagement",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24525369"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Username\":\"firstUserEver2\",\r\n    \"Email\":\"firstemail2@e.com\",\r\n    \"Password\":\"firstPasswordEver2123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/users/register",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Username\":\"firstUserEver\",\r\n    \"Email\":\"firstemail@e.com\",\r\n    \"Password\":\"firstPasswordEver123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/users/login",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tasks",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMTk5MTUyNi04NDBkLTc1NTItYmY0NC0yYWNhYTFiYTdmOGIiLCJlbWFpbCI6ImZpcnN0ZW1haWxAZS5jb20iLCJqdGkiOiI4YjY1YjIwNy04OGEwLTRiNTQtYmY4Yy1iYzdiN2M0ODEwYWQiLCJuYW1lIjoiZmlyc3RVc2VyRXZlciIsIm5iZiI6MTc1NzE1Njg2NSwiZXhwIjoxNzU3MTg1NjY1LCJpYXQiOjE3NTcxNTY4NjUsImlzcyI6IlRhc2tNYW5hZ2VtZW50QXBpIiwiYXVkIjoiVGFza01hbmFnZW1lbnRBcGkifQ.QJg7xI0_IonnT-bbzA74G8YNPuhJYmVkl4FuCPr07vU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Title\": \"Priority0\",\r\n    \"Description\":null,//\"testDescription\",\r\n    \"DueDate\":null,//\"2025-10-10T00:00:00Z\",\r\n    \"Status\":1,\r\n    \"Priority\":0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/tasks",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tasks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "019919eb-96bf-760c-85ca-2c8320723f25",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Title\": \"Updated\",\r\n    \"Description\":Updated,//\"testDescription\",\r\n    \"Status\":1,\r\n    \"Priority\":2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/tasks/019919eb-96bf-760c-85ca-2c8320723f25",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tasks",
+								"019919eb-96bf-760c-85ca-2c8320723f25"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllTasks",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMTk5MTUyNi04NDBkLTc1NTItYmY0NC0yYWNhYTFiYTdmOGIiLCJlbWFpbCI6ImZpcnN0ZW1haWxAZS5jb20iLCJqdGkiOiJhNDY2NmI5My1kMWJmLTQ2MjktOTc5Mi0yY2M1MTYxYzVkMDgiLCJuYW1lIjoiZmlyc3RVc2VyRXZlciIsIm5iZiI6MTc1NzA4NjY2NCwiZXhwIjoxNzU3MTE1NDY0LCJpYXQiOjE3NTcwODY2NjQsImlzcyI6IlRhc2tNYW5hZ2VtZW50QXBpIiwiYXVkIjoiVGFza01hbmFnZW1lbnRBcGkifQ.FYOO8TalzX_wc0v-hhXiE1EQ4SQXuZhHvxP7xb_LCHU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/tasks/all?pageNumber=1&pageSize=100",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tasks",
+								"all"
+							],
+							"query": [
+								{
+									"key": "pageNumber",
+									"value": "1"
+								},
+								{
+									"key": "pageSize",
+									"value": "100"
+								},
+								{
+									"key": "status",
+									"value": "Pending",
+									"disabled": true
+								},
+								{
+									"key": "priority",
+									"value": "High",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllTasks Current User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMTk5MTUyNi04NDBkLTc1NTItYmY0NC0yYWNhYTFiYTdmOGIiLCJlbWFpbCI6ImZpcnN0ZW1haWxAZS5jb20iLCJqdGkiOiI4YjY1YjIwNy04OGEwLTRiNTQtYmY4Yy1iYzdiN2M0ODEwYWQiLCJuYW1lIjoiZmlyc3RVc2VyRXZlciIsIm5iZiI6MTc1NzE1Njg2NSwiZXhwIjoxNzU3MTg1NjY1LCJpYXQiOjE3NTcxNTY4NjUsImlzcyI6IlRhc2tNYW5hZ2VtZW50QXBpIiwiYXVkIjoiVGFza01hbmFnZW1lbnRBcGkifQ.QJg7xI0_IonnT-bbzA74G8YNPuhJYmVkl4FuCPr07vU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/tasks/?pageNumber=1&pageSize=100&orderByPriority=true",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tasks",
+								""
+							],
+							"query": [
+								{
+									"key": "pageNumber",
+									"value": "1"
+								},
+								{
+									"key": "pageSize",
+									"value": "100"
+								},
+								{
+									"key": "status",
+									"value": "Pending",
+									"disabled": true
+								},
+								{
+									"key": "priority",
+									"value": "High",
+									"disabled": true
+								},
+								{
+									"key": "orderByPriority",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get By Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMTk5MTUyNi04NDBkLTc1NTItYmY0NC0yYWNhYTFiYTdmOGIiLCJlbWFpbCI6ImZpcnN0ZW1haWxAZS5jb20iLCJqdGkiOiJhNDY2NmI5My1kMWJmLTQ2MjktOTc5Mi0yY2M1MTYxYzVkMDgiLCJuYW1lIjoiZmlyc3RVc2VyRXZlciIsIm5iZiI6MTc1NzA4NjY2NCwiZXhwIjoxNzU3MTE1NDY0LCJpYXQiOjE3NTcwODY2NjQsImlzcyI6IlRhc2tNYW5hZ2VtZW50QXBpIiwiYXVkIjoiVGFza01hbmFnZW1lbnRBcGkifQ.FYOO8TalzX_wc0v-hhXiE1EQ4SQXuZhHvxP7xb_LCHU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/tasks/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tasks",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMTk5MTUyNi04NDBkLTc1NTItYmY0NC0yYWNhYTFiYTdmOGIiLCJlbWFpbCI6ImZpcnN0ZW1haWxAZS5jb20iLCJqdGkiOiI4YjY1YjIwNy04OGEwLTRiNTQtYmY4Yy1iYzdiN2M0ODEwYWQiLCJuYW1lIjoiZmlyc3RVc2VyRXZlciIsIm5iZiI6MTc1NzE1Njg2NSwiZXhwIjoxNzU3MTg1NjY1LCJpYXQiOjE3NTcxNTY4NjUsImlzcyI6IlRhc2tNYW5hZ2VtZW50QXBpIiwiYXVkIjoiVGFza01hbmFnZW1lbnRBcGkifQ.QJg7xI0_IonnT-bbzA74G8YNPuhJYmVkl4FuCPr07vU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/tasks/01991a19-674f-7ba0-9e01-52fd02dca1f3",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tasks",
+								"01991a19-674f-7ba0-9e01-52fd02dca1f3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

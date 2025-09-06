@@ -8,6 +8,7 @@ builder.Services.AddCarter(new DependencyContextAssemblyCatalog([typeof(Program)
 builder.Services.AddMediatR(config =>
 {
     config.RegisterServicesFromAssembly(assembly);
+    config.AddOpenBehavior(typeof(LoggingBehavior<,>));
 });
 // Add DbContext via EntityFramework
 builder.Services.AddDbContext<AppDbContext>(opts =>
@@ -59,7 +60,7 @@ builder.Services.AddScoped<JwtTokenGenerator>();
 builder.Services.AddScoped<TasksRepository>();
 
 // Add custom exception handling
-//builder.Services.AddExceptionHandler<CustomExceptionHandler>();
+builder.Services.AddExceptionHandler<CustomExceptionHandling>();
 
 var app = builder.Build();
 
@@ -71,6 +72,6 @@ app.UseHttpsRedirection();
 app.MapCarter();
 
 // use global exception handling
-//app.UseExceptionHandler(opts => { });
+app.UseExceptionHandler(opts => { });
 
 app.Run();
