@@ -5,7 +5,8 @@ public record GetAllTasksByUserQuery(
     int? PageNumber = 1,
     int? PageSize = 10,
     Status? Status = null,
-    Priority? Priority = null) : IQuery<GetAllTasksByUserResult>;
+    Priority? Priority = null,
+    bool OrderByPriority = false) : IQuery<GetAllTasksByUserResult>;
 public record GetAllTasksByUserResult(IEnumerable<Models.Task> Tasks);
 
 public class GetAllTasksByUserHandler(
@@ -20,7 +21,8 @@ public class GetAllTasksByUserHandler(
             query.PageNumber ?? 1,
             query.PageSize ?? 10,
             query.Status,
-            query.Priority);
+            query.Priority,
+            query.OrderByPriority);
 
         return new GetAllTasksByUserResult(tasks);
     }

@@ -30,13 +30,17 @@ public class TasksRepository(
         int pageNumber = 1,
         int pageSize = 10,
         Status? status = null,
-        Priority? priority = null)
+        Priority? priority = null,
+        bool orderByPriority = false)
     {
         IQueryable<Models.Task> tasks = context.Tasks.Where(x => x.UserId == userId);
         if (status != null)
             tasks = tasks.Where(x => x.Status == status);
         if (priority != null)
             tasks = tasks.Where(x => x.Priority == priority);
+        tasks = tasks.OrderBy(x => x.DueDate);
+        if (orderByPriority)
+            tasks = tasks.OrderBy(x => x.Priority).ThenBy(x => x.DueDate);
         var result = await (tasks.Skip((pageNumber - 1) * pageSize).Take(pageSize)).ToListAsync();
         return result;
     }

@@ -3,7 +3,8 @@ public record GetAllTasksByUserRequest(
     int? PageNumber = 1,
     int? PageSize = 10,
     Status? Status = null,
-    Priority? Priority = null);
+    Priority? Priority = null,
+    bool OrderByPriority = false);
 public record GetAllTasksByUserResponse(IEnumerable<Models.Task> Tasks);
 public class GetAllTasksByUserEndpoint
 : ICarterModule
@@ -22,7 +23,8 @@ public class GetAllTasksByUserEndpoint
                     request.PageNumber,
                     request.PageSize,
                     request.Status,
-                    request.Priority);
+                    request.Priority,
+                    request.OrderByPriority);
 
                 var result = await sender.Send(query);
                 var response = result.Adapt<GetAllTasksByUserResponse>();
